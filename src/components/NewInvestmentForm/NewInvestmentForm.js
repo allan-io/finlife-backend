@@ -1,57 +1,15 @@
 import { useState } from "react"
+import { selectDropdown } from './helperFuncs'
 
 const NewInvestmentForm = ({defaultValue}) => {
-
-
-
 
     const [name, setName] = useState('')
     const [type, setType] = useState('')
     const [ticker, setTicker] = useState('')
-    const [purchasePrice, setPurchasePrice] = useState(0)
-    const [purchaseValue, setPurchaseValue] = useState(0)
+    const [stockPrice, setStockPrice] = useState(0)
+    const [transactionTotal, setTransactionTotal] = useState(0)
     const [broker, setBroker] = useState('')
     const [error, setError] = useState(undefined)
-
-    const selectDropdown = () => {
-        if (defaultValue === 'Ação') {
-            return (
-                <>
-                <option value="DEFAULT" disabled hidden>Select Type</option>
-                <option value="large cap">large cap</option>
-                <option value="small cap">small cap</option>
-                </>
-            )
-        } else if (defaultValue === 'FII') {
-            return (
-                <>
-                <option value="DEFAULT" disabled hidden>Select Type</option>
-                <option value="tijolo">tijolo</option>
-                <option value="fundo de fundos">fundo de fundos</option>
-                <option value="papel">papel</option>
-                </>
-            )
-        } else if (defaultValue === 'Stock') {
-            return (
-                <>
-                <option value="DEFAULT" disabled hidden>Select Type</option>
-                <option value="large cap">large cap</option>
-                <option value="small cap">small cap</option>
-                <option value="crypto">crypto</option>
-                </>
-            )
-        } else {
-            return (
-                <>
-                <option value="DEFAULT" disabled hidden>Select Type</option>
-                <option value="cdi">cdi</option>
-                <option value="emergency funds">emergency funds</option>
-                <option value="tesouro">tesouro</option>
-                </>
-            )
-
-        }
-    }
 
     const handleChange = (e) => {
         setType(e.target.value)
@@ -60,7 +18,7 @@ const NewInvestmentForm = ({defaultValue}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-            const newStock = {name, type, ticker, purchasePrice, purchaseValue, broker, defaultValue}
+            const newStock = {name, type, ticker, stockPrice, broker, defaultValue, transactionTotal}
 
             const response = await fetch('/api/investments', {
                 method: 'POST',
@@ -78,11 +36,12 @@ const NewInvestmentForm = ({defaultValue}) => {
             if (response.ok) {
                 setError(null)
                 setName('')
-                setPurchasePrice(0)
-                setPurchaseValue(0)
+                setStockPrice(0)
+                setTransactionTotal(0)
                 setTicker('')
                 setType('')
                 setBroker('')
+                e.target.type.selectedIndex = 0
                 console.log('new stock added', json)
             }
         }
@@ -100,7 +59,7 @@ const NewInvestmentForm = ({defaultValue}) => {
 
             <label>{defaultValue} Type</label>
             <select name="type" id="type" defaultValue="DEFAULT" onChange={handleChange}>
-                {selectDropdown()}
+                {selectDropdown(defaultValue)}
             </select>
 
              <label>{defaultValue} Ticker</label>
@@ -110,18 +69,18 @@ const NewInvestmentForm = ({defaultValue}) => {
             value={ticker}
              />
 
-             <label>Purchase Price</label>
+             <label>Stock Price</label>
             <input
             type="number"
-            onChange={(e) => setPurchasePrice(e.target.value)}
-            value={purchasePrice}
+            onChange={(e) => setStockPrice(e.target.value)}
+            value={stockPrice}
              />
 
-             <label>Purchase Value</label>
+             <label>Total Transaction</label>
             <input
-            type="text"
-            onChange={(e) => setPurchaseValue(e.target.value)}
-            value={purchaseValue}
+            type="number"
+            onChange={(e) => setTransactionTotal(e.target.value)}
+            value={transactionTotal}
              />
 
              <label>Broker</label>

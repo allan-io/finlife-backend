@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import NewInvestmentForm from '../../../components/NewInvestmentForm'
+import NewInvestmentForm from '../../../components/NewInvestmentForm/NewInvestmentForm'
 import InvestmentDetails from '../../../components/InvestmentDetails'
 
 

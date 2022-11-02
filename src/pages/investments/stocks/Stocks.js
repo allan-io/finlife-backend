@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import InvestmentDetails from '../../../components/InvestmentDetails'
-import NewInvestmentForm from '../../../components/NewInvestmentForm'
+import NewInvestmentForm from '../../../components/NewInvestmentForm/NewInvestmentForm'
 
 const Stocks = () => {
 

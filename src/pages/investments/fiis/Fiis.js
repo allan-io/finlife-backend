@@ -1,6 +1,6 @@
 
 
-import NewInvestmentForm from '../../../components/NewInvestmentForm'
+import NewInvestmentForm from '../../../components/NewInvestmentForm/NewInvestmentForm'
 import InvestmentDetails from '../../../components/InvestmentDetails'
 import { useEffect, useState } from 'react'
 

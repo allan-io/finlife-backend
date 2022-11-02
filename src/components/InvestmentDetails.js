@@ -1,6 +1,6 @@
 const InvestmentDetails = ( {investment} ) => {
 
-    const {name, ticker, purchasePrice, purchaseValue, broker, _id} = investment
+    const {name, ticker, broker, stockPrice, transactionTotal, divident, _id} = investment
 
     const handleClick = async () => {
         const response = await fetch(`/api/investments/${_id}`, {
@@ -17,9 +17,10 @@ const InvestmentDetails = ( {investment} ) => {
         <div className="investmentDetails">
             <h2>{name}</h2>
             <p>{ticker}</p>
-            <p>{purchasePrice}</p>
-            <p>{purchaseValue}</p>
+            <p>{stockPrice}</p>
+            <p>{transactionTotal}</p>
             <p>{broker}</p>
+            <p>{divident}</p>
             <button className="deleteBtn" onClick={handleClick}>delete</button>
         </div>
     )
