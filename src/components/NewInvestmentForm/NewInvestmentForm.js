@@ -30,6 +30,8 @@ const NewInvestmentForm = ({defaultValue}) => {
 
             const json = await response.json()
 
+
+            console.log(typeof(transactionTotal))
             if (!response.ok) {
                 setError(json.error)
             }
@@ -79,7 +81,7 @@ const NewInvestmentForm = ({defaultValue}) => {
              <label>Total Transaction</label>
             <input
             type="number"
-            onChange={(e) => setTransactionTotal(e.target.value)}
+            onChange={(e) => setTransactionTotal(parseFloat(e.target.value))}
             value={transactionTotal}
              />
 
